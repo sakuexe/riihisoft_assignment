@@ -1,0 +1,24 @@
+{
+  "cats": [
+    {
+      "name": "uni",
+      "image": "/images/cats/uni.jpg",
+      "description": "He is the strongest"
+    },
+    {
+      "name": "oye",
+      "image": "/images/cats/oye.jpg",
+      "description": "Oye is scrunkly"
+    },
+    {
+      "name": "silly",
+      "image": "/images/cats/silly.jpg",
+      "description": "Milly might be one of the most silly cats out there"
+    },
+    {
+      "name": "goof",
+      "image": "/images/cats/goof.jpg",
+      "description": "What is this guy doing?"
+    }
+  ]
+}
