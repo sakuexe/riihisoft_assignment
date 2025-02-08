@@ -1,5 +1,28 @@
 <script setup lang="ts">
 import CatCard from "@/components/CatCard.vue"
+import { onMounted, ref, Ref } from "vue"
+
+type CatReview = {
+  catReviewId: number,
+  title: string,
+  description: string,
+  imageUrl: string,
+}
+
+const catReviews = ref<CatReview[]>([]);
+onMounted(async () => {
+  catReviews.value = await getCatCards();
+})
+
+// TODO: try catch
+async function getCatCards(): CatReview[] {
+  const url = "http://localhost:5103/reviews";
+  const response = await fetch(url, {
+    method: "GET",
+  })
+  const body: CatReview[] = await response.json();
+  return body;
+}
 </script>
 
 <template>
@@ -28,7 +51,7 @@ import CatCard from "@/components/CatCard.vue"
   <section>
     <h2>Uusimmat kuvat</h2>
     <div class="preview-cards">
-      <CatCard v-for="index in 3" :key="index" />
+      <CatCard v-for="review in catReviews" :key="review.CatReviewId" v-bind:title="review.title" v-bind:description="review.description" />
     </div>
   </section>
 </template>

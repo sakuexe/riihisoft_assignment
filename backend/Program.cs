@@ -8,6 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
     throw new NotImplementedException("ConnectionString of 'DefaultConnection' was not found");
@@ -19,6 +26,8 @@ var app = builder.Build();
 
 await SeedDatabase.Initialize(app);
 
+app.UseCors();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -27,23 +36,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-User currentUser = new User("Sakuk");
-
-app.MapGet("/user", () =>
-{
-    return currentUser;
-})
-.WithName("GetUser")
-.WithOpenApi();
-
-app.MapPut("/user", (string username) =>
-{
-    // reassign current user, because records are immutable
-    currentUser = currentUser with { Username = username };
-    return currentUser;
-})
-.WithName("UpdateUser")
-.WithOpenApi();
 
 app.MapGet("/cats", (CatbaseContext db) =>
 {
@@ -53,18 +45,26 @@ app.MapGet("/cats", (CatbaseContext db) =>
 .WithName("GetCats")
 .WithOpenApi();
 
-app.MapGet("/reviews", (CatbaseContext db) =>
+app.MapGet("/reviews", (CatbaseContext db, HttpContext context) =>
 {
-    CatReview[] reviews = db.CatReviews.ToArray();
-    return reviews;
+    string? limitRaw = context.Request.Query["limit"];
+    int limit = 0; // default the limit to 0 (all results)
+
+    // validate the limit query if there is one
+    if (limitRaw != null && !int.TryParse(limitRaw, out limit))
+        return Results.BadRequest("Invalid limit value. The value must be a positive integer");
+    if (limit < 0)
+        return Results.BadRequest("Invalid limit value. The value must be a positive integer");
+
+    CatReview[] reviews;
+    if (limit > 0)
+        reviews = db.CatReviews.OrderByDescending(r => r.CatReviewId).Take(limit).ToArray();
+    else
+        reviews = db.CatReviews.ToArray();
+
+    return Results.Ok(reviews);
 })
 .WithName("GetCatReviews")
 .WithOpenApi();
 
 app.Run();
-
-record User(string Username)
-{
-    public string Greeting => $"Hello there, {Username}";
-    public DateTime createdAt = DateTime.Now;
-}

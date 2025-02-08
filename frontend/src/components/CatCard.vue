@@ -1,4 +1,8 @@
-<script setup>
+<script setup lang="ts">
+defineProps<{
+  title?: string
+  description?: string
+}>()
 </script>
 
 <template>
@@ -7,10 +11,9 @@
       <img alt="Image of the cat 'maka'" src="@/assets/images/cats/uni.jpg" width="400" />
     </div>
     <div class="card-body">
-      <h4>Kissa</h4>
+      <h4>{{ title }}</h4>
       <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero aliquam velit nostrum quam, architecto
-        commodi dolor consequatur vel tempora.
+        {{ description }}
       </p>
     </div>
   </div>
