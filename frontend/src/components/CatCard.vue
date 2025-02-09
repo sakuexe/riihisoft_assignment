@@ -11,45 +11,105 @@ defineProps<{
 
 <template>
   <div class="card shadow-sharp">
+
+    <div class="card-header">
+      <p><strong>{{ catName }}</strong></p>
+      <div class="button"></div>
+      <div class="button"></div>
+    </div>
+
     <div class="card-image">
       <img :alt="`Image of the cat '${catName}'`" :src="image" width="400" />
     </div>
+
     <div class="card-body">
       <div>
-        <p><strong>{{ catName }}</strong></p>
         <p>{{ createdAt }}</p>
+        <h4>{{ title }}</h4>
       </div>
-      <h4>{{ title }}</h4>
       <p>
         {{ description }}
       </p>
     </div>
+
     <div class="card-footer">
-      {{ rating }}
+      <div>
+        <i v-for="star in rating" class="fa-solid fa-star"></i>
+        <i v-for="star in 5 - rating" class="fa-regular fa-star"></i>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .card {
-  border: 4px solid black;
+  --padding-inline: 1em;
+  --padding-block: 0.75em;
+  border: 4px solid var(--color-secondary);
+  background-color: var(--color-accent);
+  color: var(--color-secondary);
+  display: flex;
+  flex-direction: column;
 }
+
+.card * {
+  margin: 0;
+}
+
+/* header */
+.card-header {
+  border-bottom: 4px solid var(--color-secondary);
+  display: flex;
+  gap: 1em;
+  padding-inline: var(--padding-inline);
+}
+
+.card-header > p {
+  margin-right: auto;
+  font-weight: 700;
+  font-size: 1.25em;
+  padding-block: var(--padding-block);
+}
+
+.card-header > .button {
+  width: 4px;
+  background-color: var(--color-secondary);
+}
+
+/* image */
 .card-image {
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid var(--color-secondary);
   overflow: clip;
   width: 100%;
   aspect-ratio: 3/2;
 }
-.card-image > img {
+
+.card-image>img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
-.card-body > div:first-child {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
+/* body */
+.card-body {
+  padding: var(--padding-block) var(--padding-inline);
+  display: grid;
+  gap: var(--padding-block);
+  flex-grow: 1;
 }
+
+.card-body h4 {
+  font-size: 1.25em;
+}
+
+.card-footer {
+  border-top: 4px solid var(--color-secondary);
+  padding: var(--padding-block) var(--padding-inline);
+}
+
+.card-footer > div:first-of-type {
+  font-size: 1.5em;
+}
+
 </style>
