@@ -89,8 +89,12 @@ app.MapPost("/reviews", async (CatbaseContext db, HttpContext context) =>
         return Results.BadRequest("field 'rating' was not found within request or was not a valid integer");
     if (!form.ContainsKey("title"))
         return Results.BadRequest("field 'title' was not found within request");
+    if (form["title"].ToString().Trim() == "")
+        return Results.BadRequest("field 'title' cannot be empty");
     if (!form.ContainsKey("review"))
         return Results.BadRequest("field 'review' was not found within request");
+    if (form["review"].ToString().Trim() == "")
+        return Results.BadRequest("field 'review' cannot be empty");
 
     // get the cat
     Cat? chosenCat = await db.Cats.FirstOrDefaultAsync(c => c.CatId == catId);

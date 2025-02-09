@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 // following the CatDto record from the api
 type Cat = {
@@ -37,6 +40,45 @@ async function getCats(): Promise<Cat[]> {
   const body: Cat[] = await response.json();
   return body;
 }
+
+type ServerError = {
+  message: string,
+  statusCode?: number,
+  error?: Error
+}
+
+const formError = ref<ServerError | null>(null);
+
+async function createReview(event: SubmitEvent) {
+  event.preventDefault();
+  formError.value = null;
+
+  const form = event.target as HTMLFormElement
+
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: new FormData(form)
+    })
+
+    if (!response.ok) {
+      formError.value = {
+        statusCode: response.status,
+        message: await response.text(),
+      }
+      return;
+    }
+  } catch (error) {
+    formError.value = {
+      message: "Error while connecting to the backend",
+      error: error,
+    }
+    return;
+  }
+
+  router.push({ name: 'reviews' });
+  return;
+}
 </script>
 
 <template>
@@ -45,7 +87,7 @@ async function getCats(): Promise<Cat[]> {
     <h1>Leave your review</h1>
   </section>
   <section>
-    <form action="http://localhost:5103/reviews" method="POST">
+    <form action="http://localhost:5103/reviews" method="POST" @submit="createReview">
       <div class="cat-image">
         <img v-if="currentCat != null" :src="currentCat.imageUrl" :alt="`preview image for ${currentCat.value}`" />
       </div>
@@ -76,6 +118,13 @@ async function getCats(): Promise<Cat[]> {
         </div>
       </div>
       <button type="submit">Submit</button>
+
+      <div v-if="formError != null" class="error-msg">
+        <p v-if="formError.statusCode">{{ formError.statusCode }}</p>
+        <p>{{ formError.message }}</p>
+        <p v-if="formError.error">{{ formError.error }}</p>
+      </div>
+
     </form>
   </section>
 </template>
