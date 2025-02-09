@@ -37,6 +37,10 @@ async function getCatCards(): Promise<CatReview[]> {
 <template>
   <section class="about">
     <h1>The Reviews</h1>
+    <p>
+      Pick your favorite from our wide range of purrfessionals. These results are <i>100%</i> organic and authentic.
+      So feel free to look around and pick one that speaks to you!
+    </p>
   </section>
 
   <section>
@@ -60,33 +64,12 @@ section {
   padding: 1em 2em;
 }
 
-#about>div {
-  display: grid;
-  border: 4px solid black;
-  background-color: #9399cc;
-  color: black;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.about {
+  margin-top: 2em;
 }
 
-#about>div>div:last-child {
-  grid-column: 2/-1;
-}
-
-#about .profile-pic {
-  overflow: clip;
-  margin: 1em;
-  border: 4px solid black;
-  background-color: var(--color-background);
-}
-
-#about .profile-pic>img {
-  width: 100%;
-  height: 100%;
-  object-position: center;
-  object-fit: cover;
+.about > * {
+  margin-block: 0;
 }
 
 .preview-cards {

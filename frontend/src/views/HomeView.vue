@@ -25,7 +25,7 @@ onMounted(async () => {
 })
 
 // TODO: try catch
-async function getCatCards(): CatReview[] {
+async function getCatCards(): Promise<CatReview[]> {
   const url = "http://localhost:5103/reviews?limit=3";
   const response = await fetch(url, {
     method: "GET",
@@ -36,8 +36,8 @@ async function getCatCards(): CatReview[] {
 </script>
 
 <template>
-  <section>
-    <h1>Professional Re-meows</h1>
+  <section class="heading">
+    <h1>Purrfessional Balance</h1>
     <p><i>Take care of your mental health by consulting our purr-fessionals</i></p>
   </section>
   <section id="about">
@@ -49,8 +49,11 @@ async function getCatCards(): CatReview[] {
         <h3>What is this about?</h3>
         <p>
           As a busy fullstack .NET Core developer, your workday is likely packed with long coding sessions, deadlines,
-          and complex projects that leave little room for self-care. That's where <strong>Purrfect Balance</strong>
-          steps in. We offer a one-of-a-kind service that allows you to rent a therapy cat to bring peace, relaxation,
+          and complex projects that leave little room for self-care. That's where <strong>Purrfessional Balance</strong>
+          steps in. 
+        </p>
+        <p>
+          We offer a one-of-a-kind service that allows you to rent a therapy cat to bring peace, relaxation,
           and comfort to your workspace. Our carefully selected cats are trained to provide the kind of soothing
           presence that can help lower stress, improve mental clarity, and boost overall well-being during even the most
           hectic of coding sprints. With gentle purrs, soft snuggles, and calming energy, our therapy cats are here to
@@ -84,6 +87,14 @@ async function getCatCards(): CatReview[] {
 <style scoped>
 section {
   padding: 1em 2em;
+}
+
+section.heading {
+  margin-top: 2em;
+}
+
+section.heading * {
+  margin-block: 0;
 }
 
 #about>div {
