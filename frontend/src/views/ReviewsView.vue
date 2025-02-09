@@ -1,7 +1,6 @@
 <script setup lang="ts">
+import { ref, onMounted } from "vue"
 import CatCard from "@/components/CatCard.vue"
-import { onMounted, ref } from "vue"
-
 // following the CatDto record from the api
 type Cat = {
   catId: number
@@ -25,8 +24,8 @@ onMounted(async () => {
 })
 
 // TODO: try catch
-async function getCatCards(): CatReview[] {
-  const url = "http://localhost:5103/reviews?limit=3";
+async function getCatCards(): Promise<CatReview[]> {
+  const url = "http://localhost:5103/reviews";
   const response = await fetch(url, {
     method: "GET",
   })
@@ -36,30 +35,11 @@ async function getCatCards(): CatReview[] {
 </script>
 
 <template>
-  <section id="about">
-    <h1>Kissakuvat.fi</h1>
-    <div class="shadow-sharp">
-      <div class="profile-pic">
-        <img alt="Riihisoft logo" class="logo" src="@/assets/images/zazucat.webp" width="400" height="400" />
-      </div>
-      <div>
-        <h3>Mistä kyse?</h3>
-        <p><i>Anna äänesi kuulua</i></p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat corrupti aliquam dolore, aspernatur
-          debitis incidunt corporis temporibus fugiat ipsam cum, reiciendis nihil fuga id. In quod beatae dolorem
-          voluptatem temporibus.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat corrupti aliquam dolore, aspernatur
-          debitis incidunt corporis temporibus fugiat ipsam cum, reiciendis nihil fuga id. In quod beatae dolorem
-          voluptatem temporibus.
-        </p>
-      </div>
-    </div>
+  <section class="about">
+    <h1>The Reviews</h1>
   </section>
+
   <section>
-    <h2>Uusimmat kuvat</h2>
     <div class="preview-cards">
       <CatCard 
         v-for="review in catReviews" 
@@ -75,7 +55,7 @@ async function getCatCards(): CatReview[] {
   </section>
 </template>
 
-<style scoped>
+<style>
 section {
   padding: 1em 2em;
 }
@@ -84,7 +64,6 @@ section {
   display: grid;
   border: 4px solid black;
   background-color: #9399cc;
-  ;
   color: black;
 
   @media (min-width: 768px) {

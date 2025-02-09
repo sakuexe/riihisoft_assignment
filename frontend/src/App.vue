@@ -6,9 +6,9 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <img alt="Riihisoft logo" class="logo" src="@/assets/images/riihisoft.svg" width="200" height="50" />
     <nav>
-      <RouterLink to="/"><i class="fa-solid fa-house"></i> Etusivu</RouterLink>
-      <RouterLink to="/about"><i class="fa-solid fa-house"></i> About</RouterLink>
-      <RouterLink to="/forms"><i class="fa-solid fa-house"></i> Lomakkeet</RouterLink>
+      <RouterLink to="/"><i class="fa-solid fa-house"></i> Home</RouterLink>
+      <RouterLink to="/reviews"><i class="fa-solid fa-house"></i> Reviews</RouterLink>
+      <RouterLink to="/form"><i class="fa-solid fa-house"></i> Leave a Review</RouterLink>
     </nav>
   </header>
 
