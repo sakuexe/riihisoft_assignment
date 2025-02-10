@@ -40,7 +40,7 @@ app.UseHttpsRedirection();
 app.MapGet("/cats", (CatbaseContext db) =>
 {
     CatDto[] cats = db.Cats.Select(c => CatDto.ToDto(c)).ToArray();
-    return cats;
+    return Results.Ok(cats);
 })
 .WithName("GetCats")
 .WithOpenApi();
