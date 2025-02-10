@@ -1,4 +1,20 @@
-## Running the project
+# Riihisoft Technical Assignment
+
+By Saku Karttunen - 2.2025
+
+## Running the code
+
+I added a docker compose to the repo to (hopefully) increase the ease of use.
+Just run one of the following command and it should _just work ™_
+
+```bash
+# in the foreground
+docker compose up --build
+# or detached
+docker compose up -d
+```
+
+## Running the code without Docker compose
 
 To run the backend, I used a docker image of the sqlserver, because I couldn't yet
 find a way to use sql server express.
