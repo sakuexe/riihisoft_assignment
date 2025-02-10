@@ -1,4 +1,4 @@
-# Riihisoft Technical Assignment
+# Riihisoft Application Technical Assignment
 
 By Saku Karttunen - 2.2025
 
