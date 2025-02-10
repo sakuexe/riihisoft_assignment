@@ -26,7 +26,7 @@ onMounted(async () => {
 
 // TODO: try catch
 async function getCatCards(): Promise<CatReview[]> {
-  const url = "http://localhost:5103/reviews?limit=3";
+  const url = "/api/reviews?limit=3";
   const response = await fetch(url, {
     method: "GET",
   })

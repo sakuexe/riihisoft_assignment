@@ -18,7 +18,7 @@ export type CatResponse = {
 // fetches the cats from the api and returns a response.
 // includes the errors as values if they happened
 export default async function getCats(): Promise<CatResponse> {
-  const url = `http://localhost:5103/cats`;
+  const url = `/api/cats`;
 
   try {
     const response = await fetch(url, {

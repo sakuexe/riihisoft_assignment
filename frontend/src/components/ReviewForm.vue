@@ -80,7 +80,7 @@ const changeCurrentCat = (event: Event) => {
         class="placeholder" />
     </div>
 
-    <form action="http://localhost:5103/reviews" method="POST" @submit="createReview">
+    <form action="/api/reviews" method="POST" @submit="createReview">
 
       <div>
         <label for="cat-id">Your therapist:</label>
