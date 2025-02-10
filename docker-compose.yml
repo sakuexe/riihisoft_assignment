@@ -18,6 +18,11 @@ services:
     networks:
       - default
       - backend_network
+    depends_on:
+      database:
+        # wait for the sqlserver to come online before starting
+        # otherwise the migrations check will make the project fail
+        condition: service_healthy
 
   database:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -26,8 +31,20 @@ services:
       - SA_PASSWORD=Salasana1
     networks:
       - backend_network
+    # persist data across container restarts
+    volumes:
+      - mssql_data:/var/opt/mssql
+    # make sure that the database is running before confirming health
+    healthcheck:
+      test: [ "CMD-SHELL", "pgrep sqlservr > /dev/null || exit 1" ]
+      interval: 10s
+      retries: 5
+      start_period: 5s
 
 
 networks:
   default:
   backend_network:
+
+volumes:
+  mssql_data:

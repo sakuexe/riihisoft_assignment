@@ -3,14 +3,11 @@ WORKDIR /app/riihisoft
 
 # Copy the most needed files first
 # this is so that the caching will work nicely
-COPY backend/Program.cs ./backend/Program.cs
 COPY backend/riihisoft.csproj ./backend/riihisoft.csproj
 COPY riihisoft.sln ./riihisoft.sln
 
 # Restore as distinct layers
 RUN dotnet restore
-RUN dotnet tool install --global dotnet-ef 
-ENV PATH="$PATH:/root/.dotnet/tools"
 
 # Copy everything, caching ends here
 COPY backend/ ./backend
