@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using riihisoft.Models;
 
 namespace riihisoft.Database;
 

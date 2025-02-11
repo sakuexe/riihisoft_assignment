@@ -12,4 +12,4 @@ COPY . .
 # change the frontend proxy url
 RUN sed -i 's/localhost:5103/backend:80/' vite.config.ts
 
-CMD ["npm", "run", "docker"]
+ENTRYPOINT ["npm", "run", "docker"]

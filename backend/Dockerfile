@@ -5,13 +5,11 @@ WORKDIR /app/riihisoft
 # this is so that the caching will work nicely
 COPY backend/riihisoft.csproj ./backend/riihisoft.csproj
 COPY riihisoft.sln ./riihisoft.sln
-
-# Restore as distinct layers
 RUN dotnet restore
 
-# Copy everything, caching ends here
+# Copy everything, caching usually ends here
 COPY backend/ ./backend
-# make tailwindcss to generate the main css file (minified)
+# Create a release
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
