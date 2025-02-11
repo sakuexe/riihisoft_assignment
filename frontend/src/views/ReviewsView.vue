@@ -1,37 +1,26 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue"
 import CatCard from "@/components/CatCard.vue"
-// following the CatDto record from the api
-type Cat = {
-  catId: number
-  name: string
-  imageUrl?: string,
-}
-
-// following the CatReviewDto record from the api
-type CatReview = {
-  catReviewId: number,
-  title: string,
-  description: string,
-  rating: number,
-  createdAt: string
-  cat: Cat
-}
+import getReviews from "../utils/GetReviews.ts"
+import type { CatReview } from "../utils/GetReviews.ts"
+import type { FetchError } from "../utils/Fetch.d.ts";
 
 const catReviews = ref<CatReview[]>([]);
-onMounted(async () => {
-  catReviews.value = await getCatCards();
-})
+const fetchError = ref<FetchError | null>(null);
 
-// TODO: try catch
-async function getCatCards(): Promise<CatReview[]> {
-  const url = "/api/reviews";
-  const response = await fetch(url, {
-    method: "GET",
-  })
-  const body: CatReview[] = await response.json();
-  return body;
-}
+onMounted(async () => {
+  fetchError.value = null;
+  const reviewResponse = await getReviews();
+  // and removed here
+  if (reviewResponse.error) {
+    fetchError.value = {
+      message: reviewResponse.error.message,
+      status: reviewResponse.error.status,
+    };
+    return;
+  }
+  catReviews.value = reviewResponse.reviews;
+})
 </script>
 
 <template>
@@ -43,7 +32,7 @@ async function getCatCards(): Promise<CatReview[]> {
     </p>
   </section>
 
-  <section>
+  <section v-if="!fetchError" >
     <div class="preview-cards">
       <CatCard 
         v-for="review in catReviews" 
@@ -57,6 +46,15 @@ async function getCatCards(): Promise<CatReview[]> {
       />
     </div>
   </section>
+
+  <section v-else>
+    <div class="error-msg shadow-sharp">
+      <p>Error fetching the reviews</p>
+      <p v-if="fetchError.status">{{ fetchError.status }}</p>
+      <p v-if="fetchError.message">{{ fetchError.message }}</p>
+    </div>
+  </section>
+
 </template>
 
 <style>

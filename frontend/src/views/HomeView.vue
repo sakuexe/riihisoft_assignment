@@ -1,38 +1,26 @@
 <script setup lang="ts">
 import CatCard from "@/components/CatCard.vue"
 import { onMounted, ref } from "vue"
-
-// following the CatDto record from the api
-type Cat = {
-  catId: number
-  name: string
-  imageUrl?: string,
-}
-
-// following the CatReviewDto record from the api
-type CatReview = {
-  catReviewId: number,
-  title: string,
-  description: string,
-  rating: number,
-  createdAt: string
-  cat: Cat
-}
+import getReviews from "../utils/GetReviews.ts"
+import type { CatReview } from "../utils/GetReviews.ts"
+import type { FetchError } from "../utils/Fetch.d.ts";
 
 const catReviews = ref<CatReview[]>([]);
-onMounted(async () => {
-  catReviews.value = await getCatCards();
-})
+const fetchError = ref<FetchError | null>(null);
 
-// TODO: try catch
-async function getCatCards(): Promise<CatReview[]> {
-  const url = "/api/reviews?limit=3";
-  const response = await fetch(url, {
-    method: "GET",
-  })
-  const body: CatReview[] = await response.json();
-  return body;
-}
+onMounted(async () => {
+  fetchError.value = null;
+  const reviewResponse = await getReviews(3);
+  // and removed here
+  if (reviewResponse.error) {
+    fetchError.value = {
+      message: reviewResponse.error.message,
+      status: reviewResponse.error.status,
+    };
+    return;
+  }
+  catReviews.value = reviewResponse.reviews;
+})
 </script>
 
 <template>
@@ -50,7 +38,7 @@ async function getCatCards(): Promise<CatReview[]> {
         <p>
           As a busy fullstack .NET Core developer, your workday is likely packed with long coding sessions, deadlines,
           and complex projects that leave little room for self-care. That's where <strong>Purrfessional Balance</strong>
-          steps in. 
+          steps in.
         </p>
         <p>
           We offer a one-of-a-kind service that allows you to rent a therapy cat to bring peace, relaxation,
@@ -76,11 +64,18 @@ async function getCatCards(): Promise<CatReview[]> {
   </section>
   <section>
     <h2>Recent Reviews</h2>
-    <div class="preview-cards">
+    <div v-if="!fetchError" class="preview-cards">
       <CatCard v-for="review in catReviews" :key="review.CatReviewId" :catName="review.cat.name" :title="review.title"
         :description="review.description" :rating="review.rating" :createdAt="review.createdAt"
         :image="review.cat.imageUrl" />
     </div>
+
+    <div v-if="fetchError" class="error-msg shadow-sharp">
+      <p>Error fetching the reviews</p>
+      <p v-if="fetchError.status">{{ fetchError.status }}</p>
+      <p v-if="fetchError.message">{{ fetchError.message }}</p>
+    </div>
+
   </section>
 </template>
 

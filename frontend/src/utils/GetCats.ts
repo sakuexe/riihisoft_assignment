@@ -1,13 +1,10 @@
+import type { FetchError } from "./Fetch.d.ts";
+
 // following the CatDto record from the api
 export type Cat = {
   catId: number
   name: string
   imageUrl?: string,
-}
-
-export type FetchError = {
-  message: string,
-  status?: string,
 }
 
 export type CatResponse = {
@@ -18,9 +15,9 @@ export type CatResponse = {
 // fetches the cats from the api and returns a response.
 // includes the errors as values if they happened
 export default async function getCats(): Promise<CatResponse> {
-  const url = `/api/cats`;
-
+  const url = "/api/cats";
   try {
+    //throw new Error("Error for testing purposes")
     const response = await fetch(url, {
       method: "GET",
     })

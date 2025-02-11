@@ -277,23 +277,11 @@ form>div:has(button[type="submit"])>button:focus {
 }
 
 /* error messages */
-.error-msg {
+form ~ .error-msg {
+  border: none;
   border-top: 4px solid var(--color-secondary);
-  padding: 0.5em 1em;
-  background-color: #703d39;
-
   @media (min-width: 1100px) {
     grid-column: 1/-1;
   }
-}
-
-.error-msg>* {
-  margin-block: 0;
-}
-
-.error-msg>p:first-child {
-  font-weight: 700;
-  font-size: 1.5em;
-  /*color: #c7726b;*/
 }
 </style>

@@ -57,24 +57,4 @@ section:has(.error-msg) {
 .about>* {
   margin-block: 0;
 }
-
-/* error messages */
-.error-msg {
-  border: 4px solid var(--color-secondary);
-  padding: 0.5em 1em;
-  background-color: #703d39;
-
-  @media (min-width: 1100px) {
-    grid-column: 1/-1;
-  }
-}
-
-.error-msg>* {
-  margin-block: 0;
-}
-
-.error-msg>p:nth-child(2) {
-  font-weight: 700;
-  font-size: 1.5em;
-}
 </style>
