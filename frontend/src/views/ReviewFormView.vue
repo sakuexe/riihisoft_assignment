@@ -24,12 +24,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="about">
+  <section class="heading">
     <p>Let us know how it went</p>
     <h1>Leave your review</h1>
   </section>
-  <section>
 
+  <section>
     <div v-if="fetchError" class="error-msg shadow-sharp">
       <p>Error fetching the cats from the database</p>
       <p v-if="fetchError.status">{{ fetchError.status }}</p>
@@ -40,21 +40,4 @@ onMounted(async () => {
   </section>
 </template>
 
-<style scoped>
-section {
-  padding: 1em 2em;
-}
-
-section:has(.error-msg) {
-  display: grid;
-  gap: 1em;
-}
-
-.about {
-  margin-top: 2em;
-}
-
-.about>* {
-  margin-block: 0;
-}
-</style>
+<style scoped></style>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{
+  reviewId: number
   catName: string
   title: string
   description: string
@@ -10,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="card shadow-sharp">
+  <div class="card shadow-sharp" :style="{ viewTransitionName: reviewId }">
 
     <div class="card-header">
       <p><strong>{{ catName }}</strong></p>

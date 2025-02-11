@@ -24,11 +24,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="heading">
-    <h1>Purrfessional Balance</h1>
-    <p><i>Take care of your mental health by consulting our purr-fessionals</i></p>
-  </section>
+
   <section id="about">
+    <div class="heading">
+      <h1>Purrfessional Balance</h1>
+      <p><i>Take care of your mental health by consulting our purr-fessionals</i></p>
+    </div>
     <div class="shadow-sharp">
       <div class="profile-pic">
         <img alt="Riihisoft logo" class="logo" src="@/assets/images/zazucat.webp" width="400" height="400" />
@@ -48,26 +49,29 @@ onMounted(async () => {
           help you recharge and regain focus.
         </p>
         <p>
-          <strong>Dr Zazu </strong>- <i>CEO and Co-founder</i>
+          - <strong>Dr Zazu </strong> <i>CEO and Co-founder</i>
         </p>
       </div>
     </div>
+
+    <div>
+      <h3>How does it work?</h3>
+      <p>
+        Consult the very real reviews left by our <strong>many</strong> high paying customers and see if you
+        there are any specific purr-fessionals for you. Each review highlights the unique traits of our furry
+        professionals—from their purring style to their preferred snuggle techniques—so you can choose the cat that
+        best matches your personality and work environment. With so many cats to choose from, you’ll find the perfect
+        match to bring balance and tranquility to your coding routine.
+      </p>
+    </div>
   </section>
-  <section>
-    <p>
-      Consult the very real reviews left by our <strong>many</strong> high paying customers and see if you
-      there are any specific purr-fessionals for you. Each review highlights the unique traits of our furry
-      professionals—from their purring style to their preferred snuggle techniques—so you can choose the cat that
-      best matches your personality and work environment. With so many cats to choose from, you’ll find the perfect
-      match to bring balance and tranquility to your coding routine.
-    </p>
-  </section>
+
   <section>
     <h2>Recent Reviews</h2>
     <div v-if="!fetchError" class="preview-cards">
-      <CatCard v-for="review in catReviews" :key="review.CatReviewId" :catName="review.cat.name" :title="review.title"
-        :description="review.description" :rating="review.rating" :createdAt="review.createdAt"
-        :image="review.cat.imageUrl" />
+      <CatCard v-for="review in catReviews" :key="review.CatReviewId" :reviewId="review.catReviewId"
+        :catName="review.cat.name" :title="review.title" :description="review.description" :rating="review.rating"
+        :createdAt="review.createdAt" :image="review.cat.imageUrl" />
     </div>
 
     <div v-if="fetchError" class="error-msg shadow-sharp">
@@ -80,19 +84,20 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-section {
-  padding: 1em 2em;
+.heading {
+  grid-column: 1/-1;
 }
 
-section.heading {
-  margin-top: 2em;
+#about {
+  display: grid;
+  gap: 0.75em 1.5em;
+
+  @media (min-width: 1500px) {
+    grid-template-columns: 2fr 1fr;
+  }
 }
 
-section.heading * {
-  margin-block: 0;
-}
-
-#about>div {
+#about>div.shadow-sharp {
   display: grid;
   border: 4px solid black;
   background-color: #9399cc;
@@ -101,6 +106,10 @@ section.heading * {
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+#about>div.shadow-sharp>div:not(.profile-pic) {
+  padding: 1em 1em;
 }
 
 #about>div>div:last-child {

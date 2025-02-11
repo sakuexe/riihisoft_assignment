@@ -32,8 +32,8 @@ onMounted(async () => {
     </p>
   </section>
 
-  <section v-if="!fetchError" >
-    <div class="preview-cards">
+  <section>
+    <div v-if="!fetchError" class="preview-cards">
       <CatCard 
         v-for="review in catReviews" 
         :key="review.CatReviewId"
@@ -45,25 +45,18 @@ onMounted(async () => {
         :image="review.cat.imageUrl"
       />
     </div>
-  </section>
 
-  <section v-else>
-    <div class="error-msg shadow-sharp">
+    <div v-else class="error-msg shadow-sharp">
       <p>Error fetching the reviews</p>
       <p v-if="fetchError.status">{{ fetchError.status }}</p>
       <p v-if="fetchError.message">{{ fetchError.message }}</p>
     </div>
   </section>
-
 </template>
 
 <style>
-section {
-  padding: 1em 2em;
-}
-
 .about {
-  margin-top: 2em;
+  max-width: 70ch;
 }
 
 .about > * {
