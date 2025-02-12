@@ -36,7 +36,7 @@
         <mxCell id="nEQn-P0i9E69s7znphF9-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=none;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="nEQn-P0i9E69s7znphF9-9" target="nEQn-P0i9E69s7znphF9-53">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="nEQn-P0i9E69s7znphF9-9" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Azure Container Apps&lt;br&gt;&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;shadow=1;shadowOpacity=100;shadowBlur=0;shadowOffsetX=4;shadowOffsetY=4;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="nEQn-P0i9E69s7znphF9-9" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Azure Web App Service&lt;br&gt;&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;shadow=1;shadowOpacity=100;shadowBlur=0;shadowOffsetX=4;shadowOffsetY=4;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="120" y="150" width="230" height="80" as="geometry" />
         </mxCell>
         <mxCell id="nEQn-P0i9E69s7znphF9-17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;labelBackgroundColor=none;fontColor=default;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="nEQn-P0i9E69s7znphF9-14" target="nEQn-P0i9E69s7znphF9-5">
