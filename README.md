@@ -42,10 +42,10 @@ The plan was to design a potential deployment strategy for this project using
 services provided by Microsoft Azure.
 
 (Image 1. A diagram of a hypothetical deployment pipeline)
-![Flow diagram of a hypothetical project pipeline](./riihisoft_azure_diagram.svg)
+![Flow diagram of a hypothetical project pipeline](./assets/riihisoft_azure_diagram.svg)
 
-(Image 2. Same diagram but in light theme)
-![Flow diagram of a hypothetical project pipeline](./riihisoft_azure_diagram_light.svg)
+(Image 2. The same diagram but in light theme)
+![Flow diagram of a hypothetical project pipeline](./assets/riihisoft_azure_diagram_light.svg)
 
 ### The services
 
@@ -75,8 +75,8 @@ projects to it
 #### [Azure SQL Database](https://azure.microsoft.com/en-us/products/azure-sql/database)
 
 Azure SQL Database would allow the Docker containers to be "stateless" in a 
-sense, since all the data would be stored somewhere else. This would help with
-for example the horizontal scaling of the backend.
+sense, since all the important data would be stored somewhere else. This would 
+help with horizontally scaling the backend.
 
 **Positives**
 
@@ -103,7 +103,8 @@ euros a month and most likely would stay within the free tier for data transfer.
 
 Github Actions would create initial part of the CI/CD pipeline between the
 developer and the deployment. It provides a large amount of compute even with
-the free tier and it is already used for version control.
+the free tier. On top of this it is already part of Github which is the most
+widely use version control repository service.
 
 The docker image would be built there every time something new is pushed to the
 main branch. It also would allow for testing before building the image, to make
@@ -129,3 +130,11 @@ generated files.
 
 - Cheaper than many other file storage services
 - Can be accessed from anywhere
+
+I have used Azure Blob Storage in my HAMK Thesis, where it was used for storing
+backups. There I compared the costs of it against the Azure Files service.
+The following image is from the thesis which can be found here: 
+
+[NoSQL-tietokannan varmuuskopiointiratkaisun luominen Windows Server -ympäristössä](https://urn.fi/URN:NBN:fi:amk-2024121435798)
+
+![Pricing estimate of Azure Files and Blob Storage from my thesis](./assets/pricing_estimates.svg)
