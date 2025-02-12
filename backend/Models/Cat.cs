@@ -9,3 +9,10 @@ public class Cat
 
     public List<CatReview> Reviews { get; } = new();
 }
+
+record CatDto(int CatId, string Name, string? ImageUrl)
+{
+    public static CatDto ToDto(Cat cat) {
+        return new CatDto(cat.CatId, cat.Name, cat.ImageUrl);
+    }
+}

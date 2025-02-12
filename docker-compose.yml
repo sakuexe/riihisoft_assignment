@@ -29,6 +29,7 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Salasana1
+      - MSSQL_PID=Express # use the express edition
     networks:
       - backend_network
     # persist data across container restarts

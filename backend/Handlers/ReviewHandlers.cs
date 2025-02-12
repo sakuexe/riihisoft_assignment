@@ -14,7 +14,8 @@ public static class ReviewsHandler
         // validate the limit query if there is one
         if (limitRaw != null && !int.TryParse(limitRaw, out limit))
             return Results.BadRequest("Invalid limit value. The value must be a positive integer");
-        if (limit < 0) {
+        if (limit < 0)
+        {
             return Results.BadRequest("Invalid limit value. The value must be a positive integer");
         }
 
@@ -38,7 +39,12 @@ public static class ReviewsHandler
 
     public static async Task<IResult> AddReview(HttpContext context, CatbaseContext db)
     {
-        var form = await context.Request.ReadFormAsync();
+        IFormCollection form;
+        try {
+             form = await context.Request.ReadFormAsync();
+        } catch (InvalidOperationException) {
+            return Results.BadRequest("Invalid request body. Could not read form data");
+        }
         int catId;
         int rating;
 
