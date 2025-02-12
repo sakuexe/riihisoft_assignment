@@ -35,3 +35,7 @@ docker run -e 'ACCEPT_EULA=Y' \
   -p 1433:1433 --name sql-express \
   -d mcr.microsoft.com/mssql/server:2022-latest
 ```
+
+## Extra Assignment
+
+![Flow diagram of a hypothetical project pipeline](./riihisoft_azure_diagram.svg)
