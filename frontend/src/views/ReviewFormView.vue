@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
 import ReviewForm from "@/components/ReviewForm.vue";
-import getCats from "../utils/GetCats.ts";
-import type { Cat, FetchError } from "../utils/GetCats.ts";
+import getCats from "@/utils/GetCats.ts";
+import type { Cat } from "@/utils/GetCats.ts";
+import type { FetchError } from "@/utils/Fetch.d.ts";
 
 const cats = ref<Cat[]>([]);
 const fetchError = ref<FetchError | null>(null);

@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="card shadow-sharp" :style="{ viewTransitionName: reviewId }">
+  <div class="card shadow-sharp" :style="{ viewTransitionName: `${reviewId}` }">
 
     <div class="card-header">
       <p><strong>{{ catName }}</strong></p>
@@ -35,8 +35,8 @@ defineProps<{
 
     <div class="card-footer">
       <div>
-        <i v-for="star in rating" class="fa-solid fa-star"></i>
-        <i v-for="star in 5 - rating" class="fa-regular fa-star"></i>
+        <i v-for="_ in rating" class="fa-solid fa-star"></i>
+        <i v-for="_ in 5 - rating" class="fa-regular fa-star"></i>
       </div>
     </div>
   </div>

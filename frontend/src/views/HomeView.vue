@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import CatCard from "@/components/CatCard.vue"
 import { onMounted, ref } from "vue"
-import getReviews from "../utils/GetReviews.ts"
-import type { CatReview } from "../utils/GetReviews.ts"
-import type { FetchError } from "../utils/Fetch.d.ts";
+import getReviews from "@/utils/GetReviews.ts"
+import type { CatReview } from "@/utils/GetReviews.ts"
+import type { FetchError } from "@/utils/Fetch.d.ts";
 
 const catReviews = ref<CatReview[]>([]);
 const fetchError = ref<FetchError | null>(null);
@@ -69,7 +69,7 @@ onMounted(async () => {
   <section>
     <h2>Recent Reviews</h2>
     <div v-if="!fetchError" class="preview-cards">
-      <CatCard v-for="review in catReviews" :key="review.CatReviewId" :reviewId="review.catReviewId"
+      <CatCard v-for="review in catReviews" :key="review.catReviewId" :reviewId="review.catReviewId"
         :catName="review.cat.name" :title="review.title" :description="review.description" :rating="review.rating"
         :createdAt="review.createdAt" :image="review.cat.imageUrl" />
     </div>

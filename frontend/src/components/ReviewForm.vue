@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useRouter } from 'vue-router';
-import { Cat } from "../utils/GetCats";
+import type { Cat } from "@/utils/GetCats";
 
 export type FormError = {
   message: string,
   status?: string,
-  error?: Error
+  error?: string
 }
 
 const props = defineProps<{
@@ -40,7 +40,7 @@ async function createReview(event: SubmitEvent) {
   } catch (error) {
     formError.value = {
       message: "Error while connecting to the backend",
-      error: error,
+      error: error instanceof Error ? `${error.message}` : `Unexpected error occured`,
     }
     return;
   }
@@ -75,7 +75,7 @@ const changeCurrentCat = (event: Event) => {
 <template>
   <div class="shadow-sharp">
     <div class="cat-image">
-      <img v-if="currentCat" :src="currentCat.imageUrl" :alt="`preview image for ${currentCat.value}`" />
+      <img v-if="currentCat" :src="currentCat.imageUrl" :alt="`preview image for ${currentCat.name}`" />
       <img v-if="!currentCat" src="@/assets/images/cat-customer-service.svg" alt="default icon when no cat is chosen"
         class="placeholder" />
     </div>
