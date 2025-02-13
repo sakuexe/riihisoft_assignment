@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="card shadow-sharp" :style="{ viewTransitionName: `${reviewId}` }">
+  <div class="card shadow-sharp" :style="{ viewTransitionName: `card-${reviewId}` }">
 
     <div class="card-header">
       <p><strong>{{ catName }}</strong></p>
@@ -20,7 +20,7 @@ defineProps<{
     </div>
 
     <div class="card-image">
-      <img :alt="`Image of the cat '${catName}'`" :src="image" width="400" />
+      <img :alt="`Image of the cat '${catName}'`" :src="image" />
     </div>
 
     <div class="card-body">
@@ -82,7 +82,7 @@ defineProps<{
   border-bottom: 4px solid var(--color-secondary);
   overflow: clip;
   width: 100%;
-  aspect-ratio: 3/2;
+  max-height: 225px;
 }
 
 .card-image>img {
@@ -94,10 +94,11 @@ defineProps<{
 
 /* body */
 .card-body {
-  padding: var(--padding-block) var(--padding-inline);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--padding-block);
   flex-grow: 1;
+  padding: var(--padding-block) var(--padding-inline);
 }
 
 .card-body h4 {

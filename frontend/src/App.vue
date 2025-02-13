@@ -49,6 +49,7 @@ header .logo {
 
 nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5em;
 
   @media (min-width: 1100px) {
@@ -63,9 +64,15 @@ nav>a {
   display: flex;
   gap: 0.5em;
   align-items: center;
-  width: 100%;
   border: 4px solid var(--color-secondary);
   box-shadow: 10px 10px 0px var(--color-secondary);
+  width: 100%;
+  @media (min-width: 768px) {
+    width: auto;
+  }
+  @media (min-width: 1100px) {
+    width: 100%;
+  }
 
   @media (prefers-reduced-motion: no-preference) {
     transition: all 0.15s var(--default-timing-func);

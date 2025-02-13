@@ -22,12 +22,14 @@ body {
   /* fallback (if dvh not supported) */
   min-height: min(calc(100dvh - 3 * var(--page-padding)), 1080px);
   margin: 0 auto;
-  padding: var(--page-padding);
   font-weight: normal;
   display: flex;
   flex-direction: column;
   gap: 1.5em;
 
+  @media (min-width: 768px) {
+    padding: var(--page-padding);
+  }
   @media (min-width: 1100px) {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -55,13 +57,14 @@ main {
   padding-block: 2.5em 3em;
 }
 
-main > * {
+main>* {
   margin-bottom: 3em;
 }
 
 /* sections that DO NOT explicitly span the entire width */
 section:not(.breakout) {
-  margin-inline: 2em;
+  margin-inline: 1.5em;
+
   @media (min-width: 768px) {
     margin-inline: 3em;
   }

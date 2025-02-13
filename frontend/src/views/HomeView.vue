@@ -27,7 +27,7 @@ onMounted(async () => {
 
   <section id="about">
     <div class="heading">
-      <h1>Purrfessional Balance</h1>
+      <h1>Purr&shy;fessional Balance</h1>
       <p><i>Take care of your mental health by consulting our purr-fessionals</i></p>
     </div>
     <div class="shadow-sharp">
