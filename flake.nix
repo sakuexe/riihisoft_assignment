@@ -22,6 +22,7 @@
             dotnetCorePackages.dotnet_8.runtime
             dotnet-ef
             csharp-ls
+            vue-language-server
             nodejs
           ];
           shellHook = ''
